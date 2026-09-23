@@ -253,6 +253,14 @@ h3 {
 }
 
 
+.streak-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 15px;
+    margin-top: 15px;
+}
+
+
 /* FORMS */
 
 .form-card {
@@ -524,6 +532,7 @@ select:focus {
 @media (max-width: 800px) {
 
     .stats-grid,
+    .streak-grid,
     .exercise-grid,
     .progress-grid {
         grid-template-columns: 1fr;

@@ -1,6 +1,7 @@
 const express = require("express");
 const supabase = require("../supabase");
 const auth = require("../middleware/auth");
+const { calculateStreaks } = require("../lib/streaks");
 
 const router = express.Router();
 
@@ -9,7 +10,7 @@ router.get("/", auth, async (req, res) => {
     const userId = req.user.id;
 
     // Get workouts
-    const { data: workouts, error } = await supabase
+    const { data: workoutRows, error } = await supabase
         .from("workouts")
         .select(`
             id,
@@ -29,6 +30,8 @@ router.get("/", auth, async (req, res) => {
             error: error.message
         });
     }
+
+    const workouts = workoutRows || [];
 
     // Get exercises
     const { count: exerciseCount } = await supabase
@@ -81,11 +84,18 @@ router.get("/", auth, async (req, res) => {
     }).length;
 
 
+    const { currentStreak, longestStreak } = calculateStreaks(
+        workouts.map(workout => workout.workout_date)
+    );
+
+
     res.json({
         totalWorkouts: workouts.length,
         totalExercisesPerformed,
         totalVolume,
-        workoutsThisWeek
+        workoutsThisWeek,
+        currentStreak,
+        longestStreak
     });
 });
 

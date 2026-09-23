@@ -8,7 +8,9 @@ function Dashboard() {
         totalWorkouts: 0,
         totalExercisesPerformed: 0,
         totalVolume: 0,
-        workoutsThisWeek: 0
+        workoutsThisWeek: 0,
+        currentStreak: 0,
+        longestStreak: 0
     });
 
 
@@ -112,6 +114,44 @@ function Dashboard() {
 
                         <small>
                             workouts
+                        </small>
+
+                    </div>
+
+                </section>
+
+
+                <section className="streak-grid">
+
+                    <div className="stat-card accent-card">
+
+                        <span>
+                            CURRENT STREAK
+                        </span>
+
+                        <strong>
+                            {stats.currentStreak}
+                        </strong>
+
+                        <small>
+                            {stats.currentStreak === 1 ? "day" : "days"}
+                        </small>
+
+                    </div>
+
+
+                    <div className="stat-card">
+
+                        <span>
+                            LONGEST STREAK
+                        </span>
+
+                        <strong>
+                            {stats.longestStreak}
+                        </strong>
+
+                        <small>
+                            {stats.longestStreak === 1 ? "day" : "days"}
                         </small>
 
                     </div>
