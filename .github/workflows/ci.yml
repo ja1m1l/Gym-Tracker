@@ -29,12 +29,16 @@ jobs:
 
 
       - name: Install frontend dependencies
-        working-directory: frontend
+        working-directory: gym-tracker/frontend
         run: npm ci
 
 
       - name: Build frontend
-        working-directory: frontend
+        working-directory: gym-tracker/frontend
+        env:
+          VITE_API_URL: http://localhost:5050
+          VITE_SUPABASE_URL: https://example.supabase.co
+          VITE_SUPABASE_KEY: public-anon-key
         run: npm run build
 
 
@@ -55,12 +59,12 @@ jobs:
 
 
       - name: Install backend dependencies
-        working-directory: backend
+        working-directory: gym-tracker/backend
         run: npm ci
 
 
       - name: Backend syntax check
-        working-directory: backend
+        working-directory: gym-tracker/backend
         run: node --check server.js
 
 
@@ -91,7 +95,7 @@ jobs:
         run: |
           docker build \
           -t ${{ secrets.DOCKER_USERNAME }}/gym-tracker-api:latest \
-          ./backend
+          .
 
 
       - name: Push Docker image

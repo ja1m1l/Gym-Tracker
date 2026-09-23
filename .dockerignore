@@ -1,0 +1,7 @@
+.git
+.github
+**/node_modules
+**/.env
+**/*.env
+gym-tracker/frontend
+gym-tracker/.git
